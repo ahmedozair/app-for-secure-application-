@@ -1,0 +1,66 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; 
+    font-family: 'Poppins', sans-serif;
+}
+
+
+
+body {
+   
+	height: 100vh;
+    background-color: grey;
+    backdrop-filter: blur(20px);
+
+    
+}
+	/* body of my website  */
+body:hover{
+    backdrop-filter: blur(20px);
+}
+	/* nav bar  */
+nav{
+   
+
+    padding: 15px 10px;
+	border-radius: 39px; 
+		
+
+}
+	/* style for the nav bar where ul  pages linked  */ 
+nav ul{
+	display: flex;
+	list-style: none;
+	margin: auto 0;
+	background-color:yellow;
+	border-radius: 39px; 
+
+	
+}
+nav ul li{
+	margin: 0 6px;
+	border-radius: 39px; 
+	height: 40px;
+	width: 400px;
+}
+
+ nav ul li a{
+	
+	 font-size: 20px;
+	 padding: 1px 10px;
+	 text-decoration: none;
+	 text-transform: capitalize;
+	 letter-spacing: 1px;
+	 padding: 1px 10px;
+	
+	 
+	 
+	 
+ }
+ 	/* when hover the color should change to green  */
+nav ul li a:hover{
+	background-color: green;
+     border-radius: 39px;	
+    
+} 

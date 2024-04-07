@@ -1,0 +1,95 @@
+<!--   here is my nav bar --> 
+<nav>
+
+        <ul class="links">
+    <!--   my pages  --> 
+            <li><a href="login.php">Login</a></li><br> </br>
+            <li><a href="index.html">sign up</a></li><br> </br>
+         
+
+
+        <label for="" class="bar">
+            <span class="fas fa-times" id="times"></span>
+        </label>
+    </nav>
+
+<?php
+// my email and pass input from form
+$email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
+
+$password = filter_input(INPUT_POST, 'password');
+
+// Checking email and password are not empty
+if (!empty($email) && !empty($password)) {
+    $host = "localhost";
+    $dbusername = "root";
+    $dbpassword = "";
+    $dbname = "app"; // my db name
+
+    //  connecting my connection 
+    $conn = new mysqli($host, $dbusername, $dbpassword, $dbname);
+
+    // conected/ success 
+    if ($conn->connect_error) {
+        die("not connected: " . $conn->connect_error);
+    }
+
+ // i create table in my database called login which contains email and password and used prepare to protect againist sql injection 
+    $stmt = $conn->prepare("INSERT INTO login (email, password) VALUES (?, ?)");
+
+    // statement / bind to protect againist sql injection 
+    $stmt->bind_param("ss", $email, $password);
+
+    // getting details
+    if ($stmt->execute()) {
+        // if success got to homepage 
+        header("Location: home.html");
+        exit();
+    } else {
+        // If failed error let user know
+        echo " input correct login details.";
+    }
+
+    // Closing my statement
+    $stmt->close();
+    
+    // Closing my db connection
+    $conn->close();
+} else {
+    // inform the user to input login details
+    echo "Please fill in both email and password fields.";
+}
+?>
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+	<!--  my login page --> 
+    <title>Login page </title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="form-box">
+  
+    <form method="POST" action="login.php">
+      <div class="insert-group">
+	    <h1>Login</h1> <br></br>
+		<!--   inputing my email and password--> 
+        <label>Email</label>
+        <input type="email" name="email" required /><br></br>
+        
+        <label>Password</label>
+        <input type="password" name="password" required /><br></br>
+        <!--   loging btn --> 
+        <input type="submit" value="Login"><br></br>
+		<!--   link to sign up page  --> 
+		<a href="index.html">If your not Registered click Me</a>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
